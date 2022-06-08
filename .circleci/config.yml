@@ -1,0 +1,18 @@
+version: 2.1
+jobs:
+  test:
+    docker:
+      - image: cimg/openjdk:17.0
+    steps:
+      - checkout
+      - run:
+          name: Create maven settings
+          command: echo $MVN_SETTINGS > .circleci/.settings.xml
+      - run:
+          name: Build and deploy
+          command: mvn -s .circleci/.settings.xml clean test
+
+workflows:
+  test:
+    jobs:
+      - test
