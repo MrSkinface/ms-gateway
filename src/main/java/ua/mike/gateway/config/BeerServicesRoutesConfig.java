@@ -24,7 +24,7 @@ public class BeerServicesRoutesConfig {
         return builder.routes()
                 .route(route -> route.path("/api/beer*", "/api/beer/**").uri(beerService))
                 .route(route -> route.path("/api/inventory*", "/api/inventory/**").uri(inventoryService))
-                .route(route -> route.path("/api/order*", "/api/order/**").uri(orderService))
+                .route(route -> route.path("/api/orders*", "/api/orders/**").uri(orderService))
                 .build();
     }
 }
