@@ -20,6 +20,8 @@ public class BeerServicesRoutesConfig {
     private String inventoryService;
     @Value("${ms.order.service.host}")
     private String orderService;
+    @Value("${ms.inventory.failover.service.host}")
+    private String failoverService;
 
     @Bean
     public RouteLocator beerServiceRouteLocator(RouteLocatorBuilder builder) {
@@ -27,6 +29,7 @@ public class BeerServicesRoutesConfig {
                 .route(route -> route.path("/api/beer*", "/api/beer/**").uri(beerService))
                 .route(route -> route.path("/api/inventory*", "/api/inventory/**").uri(inventoryService))
                 .route(route -> route.path("/api/orders*", "/api/orders/**").uri(orderService))
+                .route(route -> route.path("/inventory/failover").uri(failoverService))
                 .build();
     }
 }
