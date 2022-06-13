@@ -8,17 +8,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 /**
- * Created by mike on 08.06.2022 16:53
+ * Created by mike on 13.06.2022 14:06
  */
 @Configuration
-@Profile("!local-discovery")
-public class BeerServicesRoutesConfig {
+@Profile("local-discovery")
+public class BeerServicesBalancedRoutesConfig {
 
-    @Value("${ms.beer.service.host}")
+    @Value("${ms.beer.service.name}")
     private String beerService;
-    @Value("${ms.inventory.service.host}")
+    @Value("${ms.inventory.service.name}")
     private String inventoryService;
-    @Value("${ms.order.service.host}")
+    @Value("${ms.order.service.name}")
     private String orderService;
 
     @Bean
