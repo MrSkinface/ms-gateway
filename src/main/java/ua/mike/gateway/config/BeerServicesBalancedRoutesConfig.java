@@ -27,7 +27,9 @@ public class BeerServicesBalancedRoutesConfig {
     public RouteLocator beerServiceRouteLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(route -> route.path("/api/beer*", "/api/beer/**").uri(beerService))
-                .route(route -> route.path("/api/inventory*", "/api/inventory/**").uri(inventoryService))
+                .route(route -> route.path("/api/inventory*", "/api/inventory/**")
+                        .filters(filter -> filter.circuitBreaker(c -> c.setFallbackUri("forward:/inventory/failover")))
+                        .uri(inventoryService))
                 .route(route -> route.path("/api/orders*", "/api/orders/**").uri(orderService))
                 .route(route -> route.path("/inventory/failover").uri(failoverService))
                 .build();
